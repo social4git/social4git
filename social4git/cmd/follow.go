@@ -22,6 +22,6 @@ var (
 
 func init() {
 	rootCmd.AddCommand(followCmd)
-	followCmd.Flags().StringVarP(&followHandle, "handle", "h", "", "user handle to follow (e.g. maymounkov.org)")
+	followCmd.Flags().StringVar(&followHandle, "handle", "", "user handle to follow")
 	followCmd.MarkFlagRequired("handle")
 }

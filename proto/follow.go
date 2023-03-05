@@ -6,8 +6,6 @@ import (
 	"github.com/gov4git/lib4git/git"
 )
 
-// XXX: put following in public repo
-
 func Follow(
 	ctx context.Context,
 	home Home,
@@ -50,7 +48,7 @@ func FollowStageOnly(
 }
 
 func GetFollowing(ctx context.Context, home Home) Following {
-	cloned := git.CloneOne(ctx, home.TimelineReadWrite())
+	cloned := git.CloneOne(ctx, home.TimelineReadOnly())
 	return GetFollowingLocal(ctx, cloned)
 }
 

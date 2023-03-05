@@ -30,5 +30,5 @@ var (
 
 func init() {
 	rootCmd.AddCommand(followingCmd)
-	followingCmd.Flags().StringVarP(&followingHandle, "handle", "h", "", "user handle")
+	followingCmd.Flags().StringVar(&followingHandle, "handle", "", "user handle")
 }
