@@ -64,6 +64,7 @@ func (x PostWithMeta) String() string {
 	var w bytes.Buffer
 	fmt.Fprintf(&w, "From: %v\n", x.Meta.By)
 	fmt.Fprintf(&w, "Time: %v\n", x.Meta.ID.Time)
+	fmt.Fprintf(&w, "Link: %v\n", x.Meta.Link())
 	fmt.Fprint(&w, string(x.Content))
 	fmt.Fprint(&w, "\n\n")
 	return w.String()
@@ -72,6 +73,10 @@ func (x PostWithMeta) String() string {
 type PostMeta struct {
 	By Handle `json:"by"`
 	ID PostID `json:"id"`
+}
+
+func (x PostMeta) Link() Link {
+	return NewLink(x.By, x.ID)
 }
 
 type Following map[Handle]bool
