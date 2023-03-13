@@ -1,9 +1,11 @@
 package proto
 
 import (
+	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -58,8 +60,18 @@ type PostWithMeta struct {
 	Meta    PostMeta
 }
 
+func (x PostWithMeta) String() string {
+	var w bytes.Buffer
+	fmt.Fprintf(&w, "From: %v\n", x.Meta.By)
+	fmt.Fprintf(&w, "Time: %v\n", x.Meta.ID.Time)
+	fmt.Fprint(&w, string(x.Content))
+	fmt.Fprint(&w, "\n\n")
+	return w.String()
+}
+
 type PostMeta struct {
 	By Handle `json:"by"`
+	ID PostID `json:"id"`
 }
 
 type Following map[Handle]bool

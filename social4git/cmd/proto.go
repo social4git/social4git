@@ -15,6 +15,10 @@ const (
 	AgentTempPath       = AgentName
 )
 
+const (
+	DateLayout = "01/02/2006"
+)
+
 type Setup struct {
 	Home proto.Home
 }
