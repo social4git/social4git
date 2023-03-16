@@ -65,8 +65,8 @@ func ParseHandle(s string) (Handle, error) {
 	if err != nil {
 		return Handle{}, err
 	}
-	if u.Scheme != "https" {
-		return Handle{}, fmt.Errorf("handle must be an https url")
+	if u.Scheme != "https" && u.Scheme != "file" {
+		return Handle{}, fmt.Errorf("handle must be an https or file url")
 	}
 	return Handle{
 		Scheme: u.Scheme,

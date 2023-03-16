@@ -2,7 +2,7 @@ package proto
 
 import (
 	"context"
-	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/gov4git/lib4git/base"
@@ -55,8 +55,11 @@ func ListFollowingPostsDayLocal(
 
 	posts := map[PostID]bool{}
 	for _, info := range infos {
-		filename := filepath.Ext(info.Name())
-		unparsedID := filename[:len(filename)-len(filepath.Ext(filename))]
+		filename := info.Name()
+		if !strings.HasSuffix(filename, "."+RawExt) {
+			continue
+		}
+		unparsedID := filename[:len(filename)-len("."+RawExt)]
 		postID, err := ParsePostID(unparsedID)
 		if err != nil {
 			base.Infof("unrecognized file %s in post directory", filename)
