@@ -13,7 +13,7 @@ func (h Home) Link(postID PostID) Link {
 }
 
 func (h Home) TimelineReadOnly() git.Address {
-	return git.NewAddress(h.Handle.URL(), TimelineBranch)
+	return git.NewAddress(h.Handle.GitURL(), TimelineBranch)
 }
 
 func (h Home) TimelineReadWrite() git.Address {
@@ -21,7 +21,7 @@ func (h Home) TimelineReadWrite() git.Address {
 }
 
 func (h Home) FollowingReadOnly() git.Address {
-	return git.NewAddress(h.Handle.URL(), FollowingBranch)
+	return git.NewAddress(h.Handle.GitURL(), FollowingBranch)
 }
 
 func (h Home) FollowingReadWrite() git.Address {

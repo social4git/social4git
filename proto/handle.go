@@ -24,16 +24,24 @@ type Handle struct {
 func (h Handle) Home() Home {
 	return Home{
 		Handle:      h,
-		TimelineURL: h.URL(),
+		TimelineURL: h.GitURL(),
 	}
 }
 
-func (h Handle) String() string {
-	return string(h.URL())
+func (h Handle) DebugString() string {
+	return fmt.Sprintf("scheme=%v host=%v path=%v", h.Scheme, h.Host, h.Path)
 }
 
-func (h Handle) URL() git.URL {
-	return git.URL(h.Scheme + "://" + h.Host + "/" + h.Path)
+func (h Handle) String() string {
+	return h.URL().String()
+}
+
+func (h Handle) URL() *url.URL {
+	return &url.URL{Scheme: h.Scheme, Host: h.Host, Path: "/" + strings.Trim(h.Path, "/")}
+}
+
+func (h Handle) GitURL() git.URL {
+	return git.URL(h.URL().String())
 }
 
 func (h Handle) MarshalJSON() ([]byte, error) {
@@ -71,7 +79,7 @@ func ParseHandle(s string) (Handle, error) {
 	return Handle{
 		Scheme: u.Scheme,
 		Host:   u.Host,
-		Path:   strings.Trim(u.Path, "/"),
+		Path:   "/" + strings.Trim(u.Path, "/"),
 	}, nil
 }
 
