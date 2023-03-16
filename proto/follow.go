@@ -2,8 +2,10 @@ package proto
 
 import (
 	"context"
+	"os"
 
 	"github.com/gov4git/lib4git/git"
+	"github.com/gov4git/lib4git/must"
 )
 
 func Follow(
@@ -40,18 +42,24 @@ func FollowStageOnly(
 	following := GetFollowingLocal(ctx, clone)
 	already := following[handle]
 	following[handle] = true
-	git.ToFileStage(ctx, git.Worktree(ctx, clone.Repo()), FollowingNS.Path(), following)
+	git.ToFileStage(ctx, git.Worktree(ctx, clone.Repo()), FollowingNS.Path(), HandleSetToUnparsedHandleList(following))
 	return git.Change[bool]{
 		Result: !already,
 		Msg:    "follow",
 	}
 }
 
-func GetFollowing(ctx context.Context, home Home) Following {
+func GetFollowing(ctx context.Context, home Home) HandleSet {
 	cloned := git.CloneOne(ctx, home.TimelineReadOnly())
 	return GetFollowingLocal(ctx, cloned)
 }
 
-func GetFollowingLocal(ctx context.Context, clone git.Cloned) Following {
-	return git.FromFile[Following](ctx, clone.Tree(), FollowingNS.Path())
+func GetFollowingLocal(ctx context.Context, clone git.Cloned) HandleSet {
+	unparsed, err := git.TryFromFile[UnparsedHandleList](ctx, clone.Tree(), FollowingNS.Path())
+	if err == os.ErrNotExist {
+		unparsed = UnparsedHandleList{}
+	} else {
+		must.NoError(ctx, err)
+	}
+	return UnparsedHandleListToHandleSet(unparsed)
 }

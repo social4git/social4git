@@ -101,7 +101,7 @@ func (hs Handles) Sort() {
 	sort.Sort(hs)
 }
 
-func FollowingToHandles(f Following) Handles {
+func FollowingToHandles(f HandleSet) Handles {
 	hs := Handles{}
 	for h := range f {
 		hs = append(hs, h)

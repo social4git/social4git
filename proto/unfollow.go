@@ -39,8 +39,8 @@ func UnfollowStageOnly(
 
 	following := GetFollowingLocal(ctx, clone)
 	already := following[handle]
-	following[handle] = false
-	git.ToFileStage(ctx, git.Worktree(ctx, clone.Repo()), FollowingNS.Path(), following)
+	delete(following, handle)
+	git.ToFileStage(ctx, git.Worktree(ctx, clone.Repo()), FollowingNS.Path(), HandleSetToUnparsedHandleList(following))
 	return git.Change[bool]{
 		Result: already,
 		Msg:    "unfollow",

@@ -22,6 +22,6 @@ var (
 
 func init() {
 	rootCmd.AddCommand(unfollowCmd)
-	unfollowCmd.Flags().StringVarP(&unfollowHandle, "handle", "h", "", "user handle to unfollow (e.g. maymounkov.org)")
+	unfollowCmd.Flags().StringVar(&unfollowHandle, "handle", "", "user handle to unfollow")
 	unfollowCmd.MarkFlagRequired("handle")
 }

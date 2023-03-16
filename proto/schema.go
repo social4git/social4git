@@ -79,7 +79,29 @@ func (x PostMeta) Link() Link {
 	return NewLink(x.By, x.ID)
 }
 
-type Following map[Handle]bool
+type HandleSet map[Handle]bool
+
+type UnparsedHandleList []string
+
+func HandleSetToUnparsedHandleList(s HandleSet) UnparsedHandleList {
+	u := UnparsedHandleList{}
+	for h := range s {
+		u = append(u, h.String())
+	}
+	return u
+}
+
+func UnparsedHandleListToHandleSet(u UnparsedHandleList) HandleSet {
+	s := HandleSet{}
+	for _, u := range u {
+		h, err := ParseHandle(u)
+		if err != nil {
+			continue
+		}
+		s[h] = true
+	}
+	return s
+}
 
 const (
 	ProtocolName           = "social4git"
