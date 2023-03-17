@@ -2,7 +2,9 @@ package proto
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/gov4git/lib4git/base"
 	"github.com/gov4git/lib4git/git"
 	"github.com/gov4git/lib4git/ns"
 )
@@ -24,27 +26,32 @@ func SyncLocal(
 	clone git.Cloned,
 ) git.ChangeNoResult {
 
-	following := GetFollowingLocal(ctx, clone)
+	following := GetFollowing(ctx, home)
 	addrs := []git.Address{}
 	caches := []git.Branch{}
 	timelineNS := []ns.NS{}
 	for handle := range following {
+		fmt.Println("following ", handle)
 		u := handle.GitURL()
 		addrs = append(addrs, git.NewAddress(u, TimelineBranch))
 		caches = append(caches, git.Branch(CacheBranch(u)))
 		timelineNS = append(timelineNS, TimelineNS)
 	}
 
-	git.EmbedOnBranch(
-		ctx,
-		clone.Repo(),
-		addrs,
-		caches,
-		FollowingBranch,
-		timelineNS,
-		false,
-		FilterPosts,
-	)
+	if len(addrs) == 0 {
+		base.Infof("not following anyone")
+	} else {
+		git.EmbedOnBranch(
+			ctx,
+			clone.Repo(),
+			addrs,
+			caches,
+			FollowingBranch,
+			timelineNS,
+			false,
+			FilterPosts,
+		)
+	}
 
 	return git.ChangeNoResult{Msg: "sync"}
 }
