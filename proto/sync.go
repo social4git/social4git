@@ -2,7 +2,6 @@ package proto
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/gov4git/lib4git/base"
 	"github.com/gov4git/lib4git/git"
@@ -31,7 +30,6 @@ func SyncLocal(
 	caches := []git.Branch{}
 	timelineNS := []ns.NS{}
 	for handle := range following {
-		fmt.Println("following ", handle)
 		u := handle.GitURL()
 		addrs = append(addrs, git.NewAddress(u, TimelineBranch))
 		caches = append(caches, git.Branch(CacheBranch(u)))

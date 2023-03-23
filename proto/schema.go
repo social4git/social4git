@@ -7,6 +7,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"math/rand"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -15,20 +16,33 @@ import (
 	"github.com/gov4git/lib4git/ns"
 )
 
-func FilterPosts(path ns.NS, _ object.TreeEntry) bool {
-	if len(path) != 5 {
-		return false
+func FilterPosts(path ns.NS, te object.TreeEntry) bool {
+	// fmt.Println(path, "->", te)
+	if len(path) > 0 {
+		if path[0] != PostDir {
+			return false
+		}
 	}
-	if path[0] != PostDir {
-		return false
+	if len(path) > 1 {
+		if _, err := strconv.Atoi(path[1]); err != nil {
+			return false
+		}
 	}
-	if _, err := strconv.Atoi(path[1]); err != nil {
-		return false
+	if len(path) > 2 {
+		if _, err := strconv.Atoi(path[2]); err != nil {
+			return false
+		}
 	}
-	if _, err := strconv.Atoi(path[2]); err != nil {
-		return false
+	if len(path) > 3 {
+		if _, err := strconv.Atoi(path[3]); err != nil {
+			return false
+		}
+		s := te.Name[:len(te.Name)-len(filepath.Ext(te.Name))]
+		if _, err := ParsePostID(s); err != nil {
+			return false
+		}
 	}
-	if _, err := strconv.Atoi(path[3]); err != nil {
+	if len(path) > 4 {
 		return false
 	}
 	return true

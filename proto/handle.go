@@ -21,6 +21,10 @@ type Handle struct {
 	Path   string
 }
 
+func NewHandle(scheme string, host string, path string) Handle {
+	return Handle{Scheme: scheme, Host: host, Path: path}
+}
+
 func (h Handle) Home() Home {
 	return Home{
 		Handle:      h,
