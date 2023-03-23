@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/go-git/go-git/v5 v5.5.2
-	github.com/gov4git/lib4git v0.0.6-0.20230323015144-8351dc6cf1f4
+	github.com/gov4git/lib4git v0.0.6-0.20230323175500-bf912f62bb72
 	github.com/spf13/cobra v1.6.1
 )
 

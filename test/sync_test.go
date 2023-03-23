@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/gov4git/lib4git/git"
 	"github.com/gov4git/lib4git/testutil"
 	"github.com/petar/social4git/proto"
 )
@@ -16,10 +17,14 @@ func TestSync(t *testing.T) {
 
 	proto.Post(ctx, testNet.Home(0), []byte("post1"))
 	proto.Post(ctx, testNet.Home(0), []byte("post2"))
-
 	proto.Follow(ctx, testNet.Home(1), testNet.Handle(0))
-
 	proto.Sync(ctx, testNet.Home(1))
+
+	r1 := git.CloneAll(ctx, testNet.Home(1).FollowingReadWrite())
+	ft := git.GetBranchTree(ctx, r1.Repo(), proto.FollowingBranch)
+	if !FindFileWithContent(ctx, ft, "post1") {
+		t.Errorf("expecting to find post")
+	}
 
 	// testutil.Hang()
 }
