@@ -4,11 +4,11 @@ go 1.19
 
 require (
 	github.com/go-git/go-git/v5 v5.5.2
-	github.com/gov4git/lib4git v0.0.6-0.20230323175500-bf912f62bb72
+	github.com/gov4git/lib4git v0.0.6-0.20230325022514-bbd4b055a53c
 	github.com/spf13/cobra v1.6.1
 )
 
-replace github.com/gov4git/lib4git => /Users/petar/src/github.com/gov4git/lib4git
+// replace github.com/gov4git/lib4git => /Users/petar/src/github.com/gov4git/lib4git
 
 require (
 	github.com/Microsoft/go-winio v0.5.2 // indirect

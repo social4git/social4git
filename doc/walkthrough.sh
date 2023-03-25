@@ -62,9 +62,14 @@ social4git show -h
 
 social4git follow --handle https://github.com/petar/petar.social4git.public.git
 
-# (7) See who you're following right now:
+# (7) See who you are following right now:
 
 social4git following
+
+# (8) See who someone else is following:
+#    This is useful for discovering new users.
+
+social4git following --handle https://github.com/petar/petar.social4git.public.git
 
 # (8) Unfollow someone
 

@@ -73,6 +73,9 @@ func MustParseHandle(ctx context.Context, urlOrHandle string) Handle {
 }
 
 func ParseHandle(s string) (Handle, error) {
+	if strings.Index(s, "://") < 0 {
+		s = "https://" + s
+	}
 	u, err := url.Parse(s)
 	if err != nil {
 		return Handle{}, err
