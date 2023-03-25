@@ -9,7 +9,7 @@ You use the application using a client. We have a command-line client for now.
 
 ## Install and use
 
-All you need to do is read is this short [walkthrough](doc/walkthrough.sh).
+All you need to do is read this short [walkthrough](doc/walkthrough.sh).
 
 ## You are not alone
 
