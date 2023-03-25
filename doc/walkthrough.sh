@@ -28,9 +28,11 @@ cat <<EOF >> ~/.social4git/config.json
      "private_url": "https://github.com/petar/petar.social4git.private.git",
      "public_auth": { "access_token": "ACCESS_TOKEN" },
      "private_auth": { "access_token": "ACCESS_TOKEN" },
-     "var_dir": "/Users/petar/.social4git"
+     "var_dir": "/Users/petar/.social4git/var"
 }
 EOF
+
+#    The var_dir directory is where social4git will keep local caches of git repos it is working with.
 
 # (4) You are ready to make your first post
 #    There are three different ways you can make a post:
@@ -96,7 +98,7 @@ social4git post -m social4git-https://github.com/petar/petar.social4git.public.g
 
 # We'll add more convenient functionalities as we go.
 
-# If you are wondering who to follow, we'll keep a list of users who want to be followed on:
+# If you are wondering who to follow, we'll keep a list of users who welcome followers:
 #    https://github.com/social4git/social4git
 
 # Thanks for being curious!
