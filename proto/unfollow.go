@@ -12,7 +12,7 @@ func Unfollow(
 	handle Handle,
 ) git.Change[bool] {
 
-	cloned := git.CloneOne(ctx, home.TimelineReadWrite())
+	cloned := git.CloneOne(ctx, home.PublicReadWrite())
 	chg := UnfollowLocal(ctx, home, cloned, handle)
 	cloned.Push(ctx)
 	return chg

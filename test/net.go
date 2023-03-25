@@ -40,16 +40,16 @@ func (x *TestNet) Handle(i int) proto.Handle {
 }
 
 type TestUser struct {
-	dir       string
-	timeline  testutil.LocalAddress
-	following testutil.LocalAddress
+	dir     string
+	public  testutil.LocalAddress
+	private testutil.LocalAddress
 }
 
 func NewTestUser(ctx context.Context, t *testing.T, dir string) *TestUser {
 	return &TestUser{
-		dir:       dir,
-		timeline:  testutil.NewLocalAddressDir(ctx, t, filepath.Join(dir, proto.TimelineBranch), proto.TimelineBranch, true),
-		following: testutil.NewLocalAddressDir(ctx, t, filepath.Join(dir, proto.FollowingBranch), proto.FollowingBranch, true),
+		dir:     dir,
+		public:  testutil.NewLocalAddressDir(ctx, t, filepath.Join(dir, proto.PublicBranch), proto.PublicBranch, true),
+		private: testutil.NewLocalAddressDir(ctx, t, filepath.Join(dir, proto.PrivateBranch), proto.PrivateBranch, true),
 	}
 }
 
@@ -58,13 +58,13 @@ func (x *TestUser) Dir() string {
 }
 
 func (x *TestUser) Handle() proto.Handle {
-	return proto.NewHandle("file", "", x.timeline.Dir())
+	return proto.NewHandle("file", "", x.public.Dir())
 }
 
 func (x *TestUser) Home() proto.Home {
 	return proto.Home{
-		Handle:       x.Handle(),
-		TimelineURL:  x.timeline.Address().Repo,
-		FollowingURL: x.following.Address().Repo,
+		Handle:     x.Handle(),
+		PublicURL:  x.public.Address().Repo,
+		PrivateURL: x.private.Address().Repo,
 	}
 }

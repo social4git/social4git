@@ -10,6 +10,7 @@ import (
 )
 
 // XXX: test with and without cache
+// XXX: test local and network repos
 func TestSync(t *testing.T) {
 	ctx := testutil.NewCtx()
 	testNet := NewTestNet(ctx, t, 2)
@@ -20,8 +21,8 @@ func TestSync(t *testing.T) {
 	proto.Follow(ctx, testNet.Home(1), testNet.Handle(0))
 	proto.Sync(ctx, testNet.Home(1))
 
-	r1 := git.CloneAll(ctx, testNet.Home(1).FollowingReadWrite())
-	ft := git.GetBranchTree(ctx, r1.Repo(), proto.FollowingBranch)
+	r1 := git.CloneAll(ctx, testNet.Home(1).PrivateReadWrite())
+	ft := git.GetBranchTree(ctx, r1.Repo(), proto.PrivateBranch)
 	if !FindFileWithContent(ctx, ft, "post1") {
 		t.Errorf("expecting to find post")
 	}

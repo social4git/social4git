@@ -9,5 +9,5 @@ func FetchLink(
 	link Link,
 ) PostWithMeta {
 
-	return GetTimelinePostByID(ctx, link.Home(), link.PostID)
+	return GetPublishedPostByID(ctx, link.Home(), link.PostID)
 }

@@ -22,19 +22,19 @@ var (
 					date, err := time.Parse(DateLayout, showDate)
 					must.NoError(ctx, err)
 					if showDay {
-						fetched = proto.FetchTimelinePostsDay(ctx, h, date)
+						fetched = proto.FetchPublishedPostsDay(ctx, h, date)
 					} else if showMonth {
-						fetched = proto.FetchTimelinePostsMonth(ctx, h, date)
+						fetched = proto.FetchPublishedPostsMonth(ctx, h, date)
 					} else {
-						fetched = proto.FetchTimelinePostsYear(ctx, h, date)
+						fetched = proto.FetchPublishedPostsYear(ctx, h, date)
 					}
 				} else {
 					if showDay {
-						fetched = proto.FetchTimelineLatestPostsDay(ctx, h)
+						fetched = proto.FetchPublishedLatestPostsDay(ctx, h)
 					} else if showMonth {
-						fetched = proto.FetchTimelineLatestPostsMonth(ctx, h)
+						fetched = proto.FetchPublishedLatestPostsMonth(ctx, h)
 					} else {
-						fetched = proto.FetchTimelineLatestPostsYear(ctx, h)
+						fetched = proto.FetchPublishedLatestPostsYear(ctx, h)
 					}
 				}
 			} else {
@@ -42,19 +42,19 @@ var (
 					date, err := time.Parse(DateLayout, showDate)
 					must.NoError(ctx, err)
 					if showDay {
-						fetched = proto.FetchFollowingPostsDay(ctx, h, date)
+						fetched = proto.FetchFollowedPostsDay(ctx, h, date)
 					} else if showMonth {
-						fetched = proto.FetchFollowingPostsMonth(ctx, h, date)
+						fetched = proto.FetchFollowedPostsMonth(ctx, h, date)
 					} else {
-						fetched = proto.FetchFollowingPostsYear(ctx, h, date)
+						fetched = proto.FetchFollowedPostsYear(ctx, h, date)
 					}
 				} else {
 					if showDay {
-						fetched = proto.FetchFollowingLatestPostsDay(ctx, h)
+						fetched = proto.FetchFollowedLatestPostsDay(ctx, h)
 					} else if showMonth {
-						fetched = proto.FetchFollowingLatestPostsMonth(ctx, h)
+						fetched = proto.FetchFollowedLatestPostsMonth(ctx, h)
 					} else {
-						fetched = proto.FetchFollowingLatestPostsYear(ctx, h)
+						fetched = proto.FetchFollowedLatestPostsYear(ctx, h)
 					}
 				}
 			}
@@ -79,5 +79,5 @@ func init() {
 	showCmd.Flags().BoolVar(&showDay, "day", false, "show a day of posts")
 	showCmd.Flags().BoolVar(&showMonth, "month", true, "show a month of posts")
 	showCmd.Flags().BoolVar(&showYear, "year", false, "show a year of posts")
-	showCmd.Flags().StringVar(&showDate, "date", "", "show posts from a date")
+	showCmd.Flags().StringVar(&showDate, "date", "", "show posts from a UTC date in format MM/DD/YYYY")
 }

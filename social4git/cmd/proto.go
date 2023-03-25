@@ -26,11 +26,11 @@ type Setup struct {
 type Config struct {
 	Handle string `json:"handle"` // e.g. https://github.com/petar/myskrit
 	//
-	TimelineURL  git.URL `json:"timeline_url"`
-	FollowingURL git.URL `json:"following_url"`
+	PublicURL  git.URL `json:"public_url"`
+	PrivateURL git.URL `json:"private_url"`
 	//
-	TimelineAuth  AuthConfig `json:"timeline_auth"`
-	FollowingAuth AuthConfig `json:"following_auth"`
+	PublicAuth  AuthConfig `json:"public_auth"`
+	PrivateAuth AuthConfig `json:"private_auth"`
 	//
 	VarDir string `json:"var_dir"`
 }
@@ -50,16 +50,16 @@ func (cfg Config) Setup(ctx context.Context) Setup {
 
 	git.SetAuthor(proto.ProtocolName+" agent", "no-reply@"+proto.ProtocolName+".xyz")
 
-	setAuth(ctx, cfg.TimelineAuth, cfg.TimelineURL)
-	setAuth(ctx, cfg.FollowingAuth, cfg.FollowingURL)
+	setAuth(ctx, cfg.PublicAuth, cfg.PublicURL)
+	setAuth(ctx, cfg.PrivateAuth, cfg.PrivateURL)
 
 	handle, err := proto.ParseHandle(string(cfg.Handle))
 	must.NoError(ctx, err)
 	return Setup{
 		Home: proto.Home{
-			Handle:       handle,
-			TimelineURL:  cfg.TimelineURL,
-			FollowingURL: cfg.FollowingURL,
+			Handle:     handle,
+			PublicURL:  cfg.PublicURL,
+			PrivateURL: cfg.PrivateURL,
 		},
 	}
 }

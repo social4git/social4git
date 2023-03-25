@@ -14,7 +14,7 @@ func Follow(
 	handle Handle,
 ) git.Change[bool] {
 
-	cloned := git.CloneOne(ctx, home.TimelineReadWrite())
+	cloned := git.CloneOne(ctx, home.PublicReadWrite())
 	chg := FollowLocal(ctx, home, cloned, handle)
 	cloned.Push(ctx)
 	return chg
@@ -50,7 +50,7 @@ func FollowStageOnly(
 }
 
 func GetFollowing(ctx context.Context, home Home) HandleSet {
-	cloned := git.CloneOne(ctx, home.TimelineReadOnly())
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
 	return GetFollowingLocal(ctx, cloned)
 }
 

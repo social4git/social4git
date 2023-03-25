@@ -3,27 +3,27 @@ package proto
 import "github.com/gov4git/lib4git/git"
 
 type Home struct {
-	Handle       Handle
-	TimelineURL  git.URL
-	FollowingURL git.URL
+	Handle     Handle
+	PublicURL  git.URL
+	PrivateURL git.URL
 }
 
 func (h Home) Link(postID PostID) Link {
 	return NewLink(h.Handle, postID)
 }
 
-func (h Home) TimelineReadOnly() git.Address {
-	return git.NewAddress(h.Handle.GitURL(), TimelineBranch)
+func (h Home) PublicReadOnly() git.Address {
+	return git.NewAddress(h.Handle.GitURL(), PublicBranch)
 }
 
-func (h Home) TimelineReadWrite() git.Address {
-	return git.NewAddress(h.TimelineURL, TimelineBranch)
+func (h Home) PublicReadWrite() git.Address {
+	return git.NewAddress(h.PublicURL, PublicBranch)
 }
 
-func (h Home) FollowingReadOnly() git.Address {
-	return git.NewAddress(h.Handle.GitURL(), FollowingBranch)
+func (h Home) PrivateReadOnly() git.Address {
+	return git.NewAddress(h.PrivateURL, PrivateBranch)
 }
 
-func (h Home) FollowingReadWrite() git.Address {
-	return git.NewAddress(h.FollowingURL, FollowingBranch)
+func (h Home) PrivateReadWrite() git.Address {
+	return git.NewAddress(h.PrivateURL, PrivateBranch)
 }

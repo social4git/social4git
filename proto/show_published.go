@@ -10,17 +10,17 @@ import (
 	"github.com/gov4git/lib4git/must"
 )
 
-func GetFollowingPostByID(
+func GetPublishedPostByID(
 	ctx context.Context,
 	home Home,
 	postID PostID,
 ) PostWithMeta {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return GetFollowingPostByIDLocal(ctx, cloned, postID)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return GetPublishedPostByIDLocal(ctx, cloned, postID)
 }
 
-func GetFollowingPostByIDLocal(
+func GetPublishedPostByIDLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	postID PostID,
@@ -32,17 +32,17 @@ func GetFollowingPostByIDLocal(
 	return PostWithMeta{Content: []byte(content), Meta: meta}
 }
 
-func ListFollowingPostsDay(
+func ListPublishedPostsDay(
 	ctx context.Context,
 	home Home,
 	day time.Time,
 ) map[PostID]bool {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return ListFollowingPostsDayLocal(ctx, cloned, day)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return ListPublishedPostsDayLocal(ctx, cloned, day)
 }
 
-func ListFollowingPostsDayLocal(
+func ListPublishedPostsDayLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	day time.Time,
@@ -71,17 +71,17 @@ func ListFollowingPostsDayLocal(
 	return posts
 }
 
-func ListFollowingPostsMonth(
+func ListPublishedPostsMonth(
 	ctx context.Context,
 	home Home,
 	day time.Time,
 ) map[PostID]bool {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return ListFollowingPostsMonthLocal(ctx, cloned, day)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return ListPublishedPostsMonthLocal(ctx, cloned, day)
 }
 
-func ListFollowingPostsMonthLocal(
+func ListPublishedPostsMonthLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	day time.Time,
@@ -90,24 +90,24 @@ func ListFollowingPostsMonthLocal(
 	posts := map[PostID]bool{}
 	y, m, _ := day.Date()
 	for t := time.Date(y, m, 1, 0, 0, 0, 0, time.UTC); t.Month() == m; t = t.AddDate(0, 0, 1) {
-		for k := range ListFollowingPostsDayLocal(ctx, clone, t) {
+		for k := range ListPublishedPostsDayLocal(ctx, clone, t) {
 			posts[k] = true
 		}
 	}
 	return posts
 }
 
-func ListFollowingPostsYear(
+func ListPublishedPostsYear(
 	ctx context.Context,
 	home Home,
 	day time.Time,
 ) map[PostID]bool {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return ListFollowingPostsYearLocal(ctx, cloned, day)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return ListPublishedPostsYearLocal(ctx, cloned, day)
 }
 
-func ListFollowingPostsYearLocal(
+func ListPublishedPostsYearLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	day time.Time,
@@ -116,71 +116,71 @@ func ListFollowingPostsYearLocal(
 	posts := map[PostID]bool{}
 	y, _, _ := day.Date()
 	for t := time.Date(y, 1, 1, 0, 0, 0, 0, time.UTC); t.Year() == y; t = t.AddDate(0, 0, 1) {
-		for k := range ListFollowingPostsDayLocal(ctx, clone, t) {
+		for k := range ListPublishedPostsDayLocal(ctx, clone, t) {
 			posts[k] = true
 		}
 	}
 	return posts
 }
 
-func FetchFollowingPostsDay(
+func FetchPublishedPostsDay(
 	ctx context.Context,
 	home Home,
 	day time.Time,
 ) []PostWithMeta {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return FetchFollowingPostsDayLocal(ctx, cloned, day)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return FetchPublishedPostsDayLocal(ctx, cloned, day)
 }
 
-func FetchFollowingPostsDayLocal(
+func FetchPublishedPostsDayLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	day time.Time,
 ) []PostWithMeta {
 
-	return fetchFollowingPosts(ctx, clone, ListFollowingPostsDayLocal(ctx, clone, day))
+	return fetchPublishedPosts(ctx, clone, ListPublishedPostsDayLocal(ctx, clone, day))
 }
 
-func FetchFollowingPostsMonth(
+func FetchPublishedPostsMonth(
 	ctx context.Context,
 	home Home,
 	day time.Time,
 ) []PostWithMeta {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return FetchFollowingPostsMonthLocal(ctx, cloned, day)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return FetchPublishedPostsMonthLocal(ctx, cloned, day)
 }
 
-func FetchFollowingPostsMonthLocal(
+func FetchPublishedPostsMonthLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	day time.Time,
 ) []PostWithMeta {
 
-	return fetchFollowingPosts(ctx, clone, ListFollowingPostsMonthLocal(ctx, clone, day))
+	return fetchPublishedPosts(ctx, clone, ListPublishedPostsMonthLocal(ctx, clone, day))
 }
 
-func FetchFollowingPostsYear(
+func FetchPublishedPostsYear(
 	ctx context.Context,
 	home Home,
 	day time.Time,
 ) []PostWithMeta {
 
-	cloned := git.CloneOne(ctx, home.FollowingReadOnly())
-	return FetchFollowingPostsYearLocal(ctx, cloned, day)
+	cloned := git.CloneOne(ctx, home.PublicReadOnly())
+	return FetchPublishedPostsYearLocal(ctx, cloned, day)
 }
 
-func FetchFollowingPostsYearLocal(
+func FetchPublishedPostsYearLocal(
 	ctx context.Context,
 	clone git.Cloned,
 	day time.Time,
 ) []PostWithMeta {
 
-	return fetchFollowingPosts(ctx, clone, ListFollowingPostsYearLocal(ctx, clone, day))
+	return fetchPublishedPosts(ctx, clone, ListPublishedPostsYearLocal(ctx, clone, day))
 }
 
-func fetchFollowingPosts(
+func fetchPublishedPosts(
 	ctx context.Context,
 	clone git.Cloned,
 	postIDMap map[PostID]bool,
@@ -193,7 +193,7 @@ func fetchFollowingPosts(
 	postIDs.Sort()
 	posts := []PostWithMeta{}
 	for _, postID := range postIDs {
-		posts = append(posts, GetFollowingPostByIDLocal(ctx, clone, postID))
+		posts = append(posts, GetPublishedPostByIDLocal(ctx, clone, postID))
 	}
 	return posts
 }

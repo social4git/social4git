@@ -50,7 +50,7 @@ func FilterPosts(path ns.NS, te object.TreeEntry) bool {
 
 var (
 	FollowingNS = ns.NS{"following.json"}
-	TimelineNS  = ns.NS{}
+	PublicNS    = ns.NS{}
 )
 
 func CacheBranch(url git.URL) string {
@@ -122,8 +122,8 @@ const (
 	ProtocolVersion        = "0.0.1"
 	PostDir                = "post"
 	PostFilenameTimeFormat = "20060102-150405"
-	TimelineBranch         = "timeline"
-	FollowingBranch        = "following"
+	PublicBranch           = "public"
+	PrivateBranch          = "private"
 	RawExt                 = "raw"
 	MetaExt                = "meta.json"
 )

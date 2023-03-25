@@ -1,0 +1,28 @@
+name: List me in the directory
+description: Use this form to list your handle in the directory
+title: I'd like to join the public directory
+labels:
+  - community
+assignees:
+  - petar
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping bootstrap a social4git community.
+  - type: input
+    id: handle
+    attributes:
+      label: Your social4git public repo URL
+      description: The URL of your social4git public repo
+      placeholder: e.g. github.com/petar/petar.social4git.public.git
+    validations:
+      required: true
+  - type: input
+    id: intro
+    attributes:
+      label: Your intro
+      description: Anything you want to say to describe yourself briefly
+      placeholder: e.g. My name is Sozopol.
+    validations:
+      required: true

@@ -27,8 +27,8 @@ func NewHandle(scheme string, host string, path string) Handle {
 
 func (h Handle) Home() Home {
 	return Home{
-		Handle:      h,
-		TimelineURL: h.GitURL(),
+		Handle:    h,
+		PublicURL: h.GitURL(),
 	}
 }
 
