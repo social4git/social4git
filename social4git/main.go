@@ -6,7 +6,7 @@ import (
 
 	"github.com/gov4git/lib4git/base"
 	"github.com/gov4git/lib4git/must"
-	"github.com/petar/social4git/social4git/cmd"
+	"github.com/social4git/social4git/social4git/cmd"
 )
 
 func main() {

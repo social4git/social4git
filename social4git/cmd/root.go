@@ -10,7 +10,7 @@ import (
 	"github.com/gov4git/lib4git/base"
 	"github.com/gov4git/lib4git/form"
 	"github.com/gov4git/lib4git/git"
-	"github.com/petar/social4git/proto"
+	"github.com/social4git/social4git/proto"
 	"github.com/spf13/cobra"
 )
 

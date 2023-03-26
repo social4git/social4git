@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/petar/social4git/proto"
+	"github.com/social4git/social4git/proto"
 	"github.com/spf13/cobra"
 )
 

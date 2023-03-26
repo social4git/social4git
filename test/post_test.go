@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/gov4git/lib4git/testutil"
-	"github.com/petar/social4git/proto"
+	"github.com/social4git/social4git/proto"
 )
 
 func TestPost(t *testing.T) {

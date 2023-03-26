@@ -1,4 +1,4 @@
-module github.com/petar/social4git
+module github.com/social4git/social4git
 
 go 1.19
 
