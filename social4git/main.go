@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gov4git/lib4git/base"
 	"github.com/gov4git/lib4git/must"
 	"github.com/social4git/social4git/social4git/cmd"
 )
 
 func main() {
-	if base.IsVerbose() {
-		cmd.Execute()
-	} else {
-		err := must.Try(
-			func() { cmd.Execute() },
-		)
-		if err != nil {
-			fmt.Fprint(os.Stderr, err)
+	defer func() {
+		if r := recover(); r != nil {
+			if e, ok := r.(must.Error); ok {
+				fmt.Fprintln(os.Stderr, e)
+				fmt.Fprintln(os.Stderr, string(e.Stack))
+			} else {
+				fmt.Fprintln(os.Stderr, r)
+			}
 		}
-	}
+	}()
+	cmd.Execute()
 }
