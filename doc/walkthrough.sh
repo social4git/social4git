@@ -21,6 +21,7 @@ go install github.com/social4git/social4git/social4git@latest
 
 # (3) Create a config file for your social identity
 
+mkdir -p $HOME/.social4git
 cat <<EOF >> ~/.social4git/config.json
 {
      "handle": "https://github.com/petar/petar.social4git.public.git",
