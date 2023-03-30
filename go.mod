@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/g8rswimmer/go-twitter/v2 v2.1.5
 	github.com/go-git/go-git/v5 v5.6.1
-	github.com/gov4git/lib4git v0.0.9
+	github.com/gov4git/lib4git v0.0.10-0.20230330231427-5d8672d149ea
 	github.com/spf13/cobra v1.6.1
 )
 
@@ -18,6 +18,7 @@ require (
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/go-git/go-billy/v5 v5.4.1 // indirect
 	github.com/gofrs/flock v0.8.1 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
