@@ -73,6 +73,9 @@ func initAfterFlags() {
 	if config.VarDir != "" {
 		git.UseCache(ctx, filepath.Join(config.VarDir, "cache"))
 	}
+	if verbose {
+		git.UseNoCacheOnDisk(ctx, os.TempDir())
+	}
 
 	setup = config.Setup(ctx)
 }
