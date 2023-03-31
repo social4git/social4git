@@ -24,6 +24,9 @@ There's a lot we hope to materialize soon:
 - liking
 - verifiable posting
 - track a Twitter timeline
+- analytics
+  - who are my followers
+  - what is the impact of my posts
 
 ## Who's behind this
 
