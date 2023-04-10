@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/g8rswimmer/go-twitter/v2 v2.1.5
 	github.com/go-git/go-git/v5 v5.6.1
-	github.com/gov4git/lib4git v0.0.10
+	github.com/gov4git/lib4git v0.0.11
 	github.com/spf13/cobra v1.6.1
 )
 
