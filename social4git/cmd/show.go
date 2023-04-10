@@ -37,16 +37,20 @@ var (
 						fetched = proto.FetchPublishedPostsDay(ctx, h, date)
 					} else if showMonth {
 						fetched = proto.FetchPublishedPostsMonth(ctx, h, date)
-					} else {
+					} else if showYear {
 						fetched = proto.FetchPublishedPostsYear(ctx, h, date)
+					} else {
+						fetched = proto.FetchPublishedPostsMonth(ctx, h, date)
 					}
 				} else {
 					if showDay {
 						fetched = proto.FetchPublishedLatestPostsDay(ctx, h)
 					} else if showMonth {
 						fetched = proto.FetchPublishedLatestPostsMonth(ctx, h)
-					} else {
+					} else if showYear {
 						fetched = proto.FetchPublishedLatestPostsYear(ctx, h)
+					} else {
+						fetched = proto.FetchPublishedLatestPostsMonth(ctx, h)
 					}
 				}
 			} else {
@@ -57,16 +61,20 @@ var (
 						fetched = proto.FetchFollowedPostsDay(ctx, h, date)
 					} else if showMonth {
 						fetched = proto.FetchFollowedPostsMonth(ctx, h, date)
-					} else {
+					} else if showYear {
 						fetched = proto.FetchFollowedPostsYear(ctx, h, date)
+					} else {
+						fetched = proto.FetchFollowedPostsMonth(ctx, h, date)
 					}
 				} else {
 					if showDay {
 						fetched = proto.FetchFollowedLatestPostsDay(ctx, h)
 					} else if showMonth {
 						fetched = proto.FetchFollowedLatestPostsMonth(ctx, h)
-					} else {
+					} else if showYear {
 						fetched = proto.FetchFollowedLatestPostsYear(ctx, h)
+					} else {
+						fetched = proto.FetchFollowedLatestPostsMonth(ctx, h)
 					}
 				}
 			}
@@ -89,7 +97,7 @@ func init() {
 	rootCmd.AddCommand(showCmd)
 	showCmd.Flags().BoolVar(&showMy, "my", false, "if set show my posts, otherwise show posts of users I follow")
 	showCmd.Flags().BoolVar(&showDay, "day", false, "show a day of posts")
-	showCmd.Flags().BoolVar(&showMonth, "month", true, "show a month of posts")
+	showCmd.Flags().BoolVar(&showMonth, "month", false, "show a month of posts")
 	showCmd.Flags().BoolVar(&showYear, "year", false, "show a year of posts")
 	showCmd.Flags().StringVar(&showDate, "date", "", "show posts from a UTC date in format MM/DD/YYYY")
 }
