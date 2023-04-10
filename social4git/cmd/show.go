@@ -13,7 +13,19 @@ var (
 	showCmd = &cobra.Command{
 		Use:   "show",
 		Short: "Show posts",
-		Long:  ``,
+		Long: `
+		Show displays posts from a timeline.
+
+		If the option --my is used, posts published by this user are displayed.
+		Otherwise, posts of the users followed by this user are displayed.
+
+		The command needs two additional pieces of information: a window duration (day, month, year) and
+		a date inside the window. The command shows posts within the calendar UTC day/month/year
+		containing the given date.
+
+		The duration is specified using --day, --month, or --year, defaulting to --month.
+		The date is specified with --date, defaulting to today.
+`,
 		Run: func(cmd *cobra.Command, args []string) {
 			h := setup.Home
 			fetched := []proto.PostWithMeta{}
