@@ -7,7 +7,6 @@ import (
 
 	"github.com/gov4git/lib4git/base"
 	"github.com/gov4git/lib4git/git"
-	"github.com/gov4git/lib4git/must"
 )
 
 func GetPublishedPostByID(
@@ -51,7 +50,9 @@ func ListPublishedPostsDayLocal(
 	fs := clone.Tree().Filesystem
 	dayNS := PostDayNS(day)
 	infos, err := fs.ReadDir(dayNS.Path())
-	must.NoError(ctx, err)
+	if err != nil { // no such file or directory
+		return nil
+	}
 
 	posts := map[PostID]bool{}
 	for _, info := range infos {
